@@ -3,10 +3,10 @@ Object Detection
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)  
 
 ## Table of Contents  
-- [Introduction](##Introduction)  
-- [Install](##Install)  
-- [Usage](##Usage)  
-- [Update log](4.Update log )
+- [Introduction](##1.Introduction  )  
+- [Install](##2.Install)  
+- [Usage](##3.Usage)  
+- [Update log](##4.Update log )
 
 ## 1.Introduction  
 
