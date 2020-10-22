@@ -6,7 +6,7 @@ Object Detection
 - [Introduction](##Introduction)  
 - [Install](##Install)  
 - [Usage](##Usage)  
-- [Update log](##Update log)
+- [Update log](4.Update log )
 
 ## 1.Introduction  
 
