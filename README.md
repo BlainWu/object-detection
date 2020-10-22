@@ -6,7 +6,7 @@ Object Detection
 - [Introduction](##1.Introduction  )  
 - [Install](##2.Install)  
 - [Usage](##3.Usage)  
-- [Update log](##4.Update log)
+- [To-do-list](##4.To-do-list)
 
 ## 1.Introduction  
 
@@ -26,4 +26,4 @@ system on the Raspberry Pi.
 
 
 
-## 4.Update log  
+## 4.To-do-list  
