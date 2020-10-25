@@ -10,7 +10,7 @@ Object Detection
 
 ## 1.Introduction  
 
-> *This project is for my graduation project which is under the guidance of Dr.Prashant in [Northumbria University](https://www.northumbria.ac.uk/).*  
+> *This project is for my graduation project which is under the guidance of Dr.Prashant and Dr.Fei Xie in [Northumbria University](https://www.northumbria.ac.uk/).*  
 
 Object detection is one of the fundamental tasks in the computer vision. By studying existing object detection methods, 
 I need to develop an object detection algorithm for detecting balls of known colours in an image. 
@@ -27,3 +27,4 @@ system on the Raspberry Pi.
 
 
 ## 4.To-do-list  
+- [ ] Create the dataset  
