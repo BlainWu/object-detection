@@ -23,9 +23,9 @@ Generate 9 anchors ,by default
 def generate_anchors (base_size=16, scales=2**np.arange(3, 6),ratios=[0.5,1,2]):
     """
     :param base_size:   the smallest square length
-    :param scales:
-    :param ratios:
-    :return:
+    :param scales:      multiples of width and height
+    :param ratios:      multiples of area
+    :return:            9 anchors with a same center in [x1,y1,x2,y2]
     """
     #generate a anchor with [0,0,15,15] in [x1,y1,x2,y2]
     base_anchor = np.array([0,0,base_size-1,base_size-1])
@@ -50,7 +50,6 @@ def _ratio_anchor(base_anchor,ratios):
 
     anchors = _mkanchors(ws,hs,x_ctr,y_ctr)
     return anchors
-
 
 def _scale_anchors(anchor, scales):
     """
@@ -81,7 +80,7 @@ def _mkanchors(ws,hs,x_ctr,y_ctr):
     :param hs:      [12,16,22]
     :param x_ctr:`  [7.5]
     :param y_ctr:   [7.5]
-    :return:        3 anchors of a same pair in [x1,y1,x2,y2]
+    :return:        3 anchors of a same group in [x1,y1,x2,y2]
     """
     ws = ws[:, np.newaxis]
     hs = hs[:, np.newaxis]
