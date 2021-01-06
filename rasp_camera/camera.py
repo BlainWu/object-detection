@@ -39,6 +39,7 @@ PWM = GPIO.PWM(12, 3000)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m','--mode',default='picture',type = str)
+parser.add_argument('-t','--time',default=10,type = int)
 args = parser.parse_args()
 
 with picamera.PiCamera() as camera:
@@ -61,6 +62,7 @@ with picamera.PiCamera() as camera:
 
     else:
         save_dir = './videos'
+        record_time = args.time
         if not os.path.exists(save_dir):
             os.mkdir(save_dir)
         print("Selected mode: video")
@@ -72,7 +74,7 @@ with picamera.PiCamera() as camera:
                 PWM.stop()
                 """保存图片"""
                 camera.start_recording('./videos/{0}.h264'.format(tmp_index))
-                camera.wait_recording(10)
+                camera.wait_recording(record_time)
                 PWM.start(1)  # duty cycle = 1%
                 time.sleep(0.5)
                 PWM.stop()
