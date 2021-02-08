@@ -6,10 +6,38 @@
 @Date   ：2021/1/4 19:45
 @Desc   ：
 =================================================='''
-
+import random
 import cv2 as cv
 import os
 from tqdm import tqdm
+
+"""Remove unlabeled images"""
+def dataset_check(img_dir,antation_dir):
+    img_list = os.listdir(img_dir)
+    antation_list=os.listdir(antation_dir)
+    print(f'图片数量{len(img_list)},标签数量{len(antation_list)}')
+    if(len(img_list) ==len(antation_list) ):
+        return
+    else:
+        for index,list in enumerate(antation_list):
+            antation_list[index] = list.split('.')[0]
+
+        del_list = []
+        for index,list in enumerate(img_list):
+            img_list[index] = list.split('.')[0]
+            if img_list[index] not in antation_list:
+                del_list.append(img_list[index])
+
+        print(f'以下图片序号没有找到标注{del_list}')
+        for i in del_list:
+            del_path = i+'.jpg'
+            os.remove(os.path.join(img_dir,del_path))
+            print(f'已删除{del_path}')
+
+'''Divided the dataset into train and val in Tensorflow format'''
+def divide_dataset(img_dir,antation_dir,ratio=0.9):
+    parent_dir = os.
+
 
 '''Get the largest index in a dir'''
 def get_tmp_index(dir):
@@ -62,4 +90,6 @@ def re_index(dir,start_index = 0):
 
 if __name__ == '__main__':
     #video2pic(videos_dir= './simple_background/videos')
-    re_index(dir = './simple_background/pics')
+    #re_index(dir = './simple_background/pics')
+    #dataset_check(img_dir='./new_ball/pics', antation_dir='./new_ball/annotations')
+    divide_dataset(img_dir='./new_ball/pics', antation_dir='./new_ball/annotations')
