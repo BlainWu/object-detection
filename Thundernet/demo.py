@@ -205,9 +205,7 @@ if __name__ == '__main__':
 
     pascal_classes = np.asarray([
         '__background__',
-        'Blue Ball',
-        'Red Ball',
-        'Yellow Ball',
+        'ball',
     ])
 
     layer = int(args.net.split("_")[1])

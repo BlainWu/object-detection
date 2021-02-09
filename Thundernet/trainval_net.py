@@ -260,7 +260,7 @@ if __name__ == '__main__':
         # ]
         args.set_cfgs = [
             'ANCHOR_SCALES', '[2, 4 , 8, 16, 32]', 'ANCHOR_RATIOS', '[1.0/2 , 3.0/4 , 1 , 4.0/3 , 2 ]',
-            'MAX_NUM_GT_BOXES', '3'
+            'MAX_NUM_GT_BOXES', '1'
         ]
     elif args.dataset == "coco":
         args.imdb_name = "coco_2017_train"

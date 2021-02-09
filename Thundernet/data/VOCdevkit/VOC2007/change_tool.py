@@ -7,6 +7,7 @@
 @Desc   ：
 =================================================='''
 import os
+from tqdm import tqdm
 import xml.etree.ElementTree as ET
 
 
@@ -37,15 +38,14 @@ def lime_list():
 
 def xml_single(xml_dir = './Annotations'):
     xml_list = os.listdir(xml_dir)
-    for xml in xml_list:
+    print("把所有标签都改成ball")
+    for xml in tqdm(xml_list):
         xml_path = os.path.join(xml_dir,xml)
-        print(xml_path)
-        doc = ET.parse(xml_path)
-        root = doc.getroot()
-        name = root.find('name')
-        name.text = 'ball'
-        doc.write(xml_path)
-
+        tree = ET.parse(xml_path)
+        root = tree.getroot()
+        for object in root.findall('object'):
+            object.find('name').text = 'ball'
+        tree.write(xml_path)
 
 if __name__ == '__main__':
     xml_single()

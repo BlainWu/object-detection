@@ -22,7 +22,9 @@ args = parser.parse_args()
 # 加载模型
 pthfile = args.model_path
 model = torch.load(pthfile)
+print(model)
 
+'''
 # 处理图片模式
 if args.mode == 'picture':
     # 加在图片列表
@@ -60,7 +62,6 @@ else:
             print("No frame anymore. Exiting......")
             break
         result = model.predict(frame)
-        pdx.det.visualize(frame, result, threshold=0.3, save_dir='buffer')
         frame_index += 1
     # 集合成视频
     jpg_list = []
@@ -72,3 +73,4 @@ else:
         frame_out = cv.imread(jpg_path)
         out.write(frame_out)
 
+'''
