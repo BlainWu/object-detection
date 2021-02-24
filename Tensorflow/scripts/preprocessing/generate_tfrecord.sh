@@ -1,0 +1,2 @@
+python generate_tfrecord.py -x /home/wupeilin/Tensorflow/workspace/training_demo/images/train -l /home/wupeilin/Tensorflow/workspace/training_demo/annotations/label_map.pbtxt -o /home/wupeilin/Tensorflow/workspace/training_demo/annotations/train.record
+python generate_tfrecord.py -x /home/wupeilin/Tensorflow/workspace/training_demo/images/test -l /home/wupeilin/Tensorflow/workspace/training_demo/annotations/label_map.pbtxt -o /home/wupeilin/Tensorflow/workspace/training_demo/annotations/test.record
