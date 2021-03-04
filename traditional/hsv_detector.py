@@ -15,8 +15,8 @@ import os
 import cv2
 import numpy as np
 import time
-import picamera
-import picamera.array
+#import picamera
+#import picamera.array
 
 MIN_POINTS = 50
 MIN_AREA = 1000
@@ -30,9 +30,9 @@ def timer():
 
 def extract_color(img,color):
     #https://www.cnblogs.com/wangyblzu/p/5710715.html
-    assert color in ['GREEN','BLUE','RED']
+    assert color in ['GREEN','BLUE','RED','None']
     if color == 'RED':
-        lower_hsv = np.array([156 , 43, 46])
+        lower_hsv = np.array([156 ,100, 46])
         upper_hsv = np.array([180, 255, 255])
     elif color == 'BLUE':
         lower_hsv = np.array([100, 200, 46])
@@ -40,6 +40,9 @@ def extract_color(img,color):
     elif color == 'GREEN':
         lower_hsv = np.array([35, 180, 46])
         upper_hsv = np.array([77, 255, 255])
+    elif color == 'None':
+        lower_hsv = np.array([0, 0, 0])
+        upper_hsv = np.array([0, 0, 0])
     hsv = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv,lowerb=lower_hsv,upperb=upper_hsv)
     return mask
@@ -137,10 +140,73 @@ def camera_detector(img_size = (640,480),color = ['BLUE'],save_path = None):
                 stream.seek(0)
                 stream.truncate()
 
+def show_process(image,save_dir,color):
+
+    from matplotlib import pyplot as plt
+    import matplotlib.gridspec as gridspec
+
+    assert os.path.exists(image),f'{image} is not exist.'
+    assert color is not None,f'Please enter the color you want to track.'
+
+    for _color in color:
+        assert _color in ['RED','GREEN','BLUE'],f'{_color} is not a valid color name, it should be RED GREEN BLUE'
+
+    save_dir = (os.path.dirname(image) if save_dir is None else save_dir)
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+
+
+    #====================================================#
+    gs = gridspec.GridSpec(2,2)
+    plt.figure(dpi= 100 ,figsize=(10,10))
+    font_size =26
+
+    '''----------------Original_image-----------------'''
+    img = cv2.imread(image)
+    out_put = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    plt.subplot(gs[0,0])
+    plt.imshow(out_put)
+    plt.title('Input Image',fontsize=font_size)
+    plt.xticks([])
+    plt.yticks([])
+    '''-----------------------------------------------'''
+
+    '''---------------------Mask----------------------'''
+    mask = extract_color(img,'None')
+    for _color in color:
+        mask = extract_color(img,_color) + mask
+
+    plt.subplot(gs[0,1])
+    plt.imshow(mask,cmap='gray')
+    plt.title('Extract Colors',fontsize=font_size)
+    plt.xticks([])
+    plt.yticks([])
+    '''-----------------------------------------------'''
+    #contours, hierarchy = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    '''---------------------Final result----------------------'''
+
+    for i in range(len(color)):
+        mask = extract_color(img, color[i])
+        img = rect_balls(img, mask, color[i])
+
+    img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    plt.subplot(2,1,2)
+    plt.imshow(img)
+    plt.title('Output Image',fontsize=font_size)
+    plt.xticks([])
+    plt.yticks([])
+
+    '''-----------------------------------------------'''
+    plt.savefig(os.path.join(save_dir, 'Result.jpg'))
+    plt.show()
+
+
 
 if __name__ == '__main__':
 
     #image_detector('./pics/1.jpg','BLUE')
     #video_detector('./videos/5.h264',['RED','BLUE','GREEN'],'./results')
-    camera_detector(color = ['BLUE'],save_path='./saved_video')
+    #camera_detector(color = ['BLUE'],save_path='./saved_video')
+    show_process(image='./data/origin.jpg',save_dir=None,color = ['RED','BLUE','GREEN'])
     pass
