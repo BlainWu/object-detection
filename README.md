@@ -27,7 +27,7 @@ system on the Raspberry Pi.
 
 
 ## 4.To-do-list  
-- [ ] Create the dataset  
-- [ ] Learn and implement Faster-RCNN(two stage)  
-- [ ] Learn and implement SSD(one stage)  
-- [ ] Learn and implement YOLOv3(one stage)  
+- [x] Create the dataset  
+- [x] Learn and implement Faster-RCNN(two stage)  
+- [x] Learn and implement SSD(one stage)  
+- [x] Learn and implement YOLOv3(one stage)  
